@@ -25,20 +25,114 @@
       <p>Selected work from 2026.</p>
     </div>
 
-    <!-- Gallery container -->
     <div class="gallery" id="gallery"></div>
   </main>
 
-  <!-- Auto gallery script -->
+  <div id="lightbox" class="lightbox hidden">
+    <button id="prev-lightbox" class="lightbox-nav" aria-label="Previous image">‹</button>
+    <img id="lightbox-image" src="" alt="" />
+    <button id="next-lightbox" class="lightbox-nav" aria-label="Next image">›</button>
+    <button id="close-lightbox" class="lightbox-close" aria-label="Close">×</button>
+  </div>
+
   <script>
     const gallery = document.getElementById("gallery");
+    const imageFiles = [];
 
     for (let i = 1; i <= 62; i++) {
-      const img = document.createElement("img");
-      img.src = `../images/2026/2026FirstBatch-${i}.jpg`;
-      img.alt = `Leatherwork from 2026 image ${i}`;
-      gallery.appendChild(img);
+      imageFiles.push(`../images/2026/2026FirstBatch-${i}.jpg`);
     }
+
+    let currentIndex = 0;
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const closeLightbox = document.getElementById("close-lightbox");
+    const prevLightbox = document.getElementById("prev-lightbox");
+    const nextLightbox = document.getElementById("next-lightbox");
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImage.src = imageFiles[currentIndex];
+      lightboxImage.alt = `Leatherwork from 2026 image ${currentIndex + 1}`;
+      lightbox.classList.remove("hidden");
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % imageFiles.length;
+      lightboxImage.src = imageFiles[currentIndex];
+      lightboxImage.alt = `Leatherwork from 2026 image ${currentIndex + 1}`;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+      lightboxImage.src = imageFiles[currentIndex];
+      lightboxImage.alt = `Leatherwork from 2026 image ${currentIndex + 1}`;
+    }
+
+    imageFiles.forEach((file, index) => {
+      const img = document.createElement("img");
+      img.src = file;
+      img.alt = `Leatherwork from 2026 image ${index + 1}`;
+
+      img.addEventListener("click", () => {
+        openLightbox(index);
+      });
+
+      img.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
+
+      img.addEventListener("dragstart", (e) => {
+        e.preventDefault();
+      });
+
+      gallery.appendChild(img);
+    });
+
+    closeLightbox.addEventListener("click", () => {
+      lightbox.classList.add("hidden");
+    });
+
+    nextLightbox.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+
+    prevLightbox.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.add("hidden");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.classList.contains("hidden")) return;
+
+      if (e.key === "Escape") {
+        lightbox.classList.add("hidden");
+      }
+
+      if (e.key === "ArrowRight") {
+        showNext();
+      }
+
+      if (e.key === "ArrowLeft") {
+        showPrev();
+      }
+    });
+
+    lightboxImage.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+
+    lightboxImage.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    });
   </script>
 
   <script src="../script.js"></script>
