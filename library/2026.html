@@ -39,9 +39,15 @@
     const gallery = document.getElementById("gallery");
     const imageFiles = [];
 
-    for (let i = 1; i <= 62; i++) {
-      imageFiles.push(`../images/2026/2026FirstBatch-${i}.jpg`);
-    }
+    const batches = [
+      { prefix: "2026FirstBatch", count: 62 }
+    ];
+
+    batches.forEach(batch => {
+      for (let i = 1; i <= batch.count; i++) {
+        imageFiles.push(`../images/2026/${batch.prefix}-${i}.jpg`);
+      }
+    });
 
     let currentIndex = 0;
 
