@@ -3,29 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css">
+  <title>Contact | The Nordic Wizard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css" />
 </head>
 <body>
 
   <header class="site-header">
-    <div class="brand">
-      <img src="images/logo.png" class="logo">
-    </div>
-    <nav>
+    <a href="index.html" class="brand" aria-label="The Nordic Wizard home">
+      <img src="images/logo.png" alt="The Nordic Wizard" class="logo" />
+    </a>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-menu">☰</button>
+
+    <nav id="nav-menu">
       <a href="index.html">Home</a>
       <a href="library.html">Library</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-      <button id="theme-toggle">◐</button>
     </nav>
   </header>
 
-  <main class="section narrow">
-    <h1>Contact</h1>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-    <p>Instagram: <a href="https://instagram.com/thenordicwizard" target="_blank">@thenordicwizard</a></p>
+  <main class="section">
+    <div class="narrow">
+      <h1>Contact</h1>
+
+      <p>
+        If a piece speaks to you, or you want to follow the journey more closely,
+        you can reach me here.
+      </p>
+
+      <p>
+        Instagram is the best way to reach me directly:
+        <br>
+        <a href="https://instagram.com/thenordicwizard" target="_blank" rel="noopener noreferrer">
+          @thenordicwizard
+        </a>
+      </p>
+
+      <p>
+        Email:
+        <br>
+        <a href="mailto:rchamut@outlook.com">
+          rchamut@outlook.com
+        </a>
+      </p>
+    </div>
   </main>
 
   <script src="script.js"></script>
