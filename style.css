@@ -164,7 +164,7 @@ nav button {
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(0, 0, 0, 0.97);
   display: grid;
   place-items: center;
   padding: 2rem;
@@ -172,38 +172,43 @@ nav button {
 }
 
 .lightbox img {
-  max-width: 90vw;
-  max-height: 88vh;
+  max-width: min(780px, 86vw);
+  max-height: 82vh;
   border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.2s ease;
 }
 
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 3rem;
+  font-size: 2.6rem;
   line-height: 1;
   color: white;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.22);
   border: none;
   cursor: pointer;
-  padding: 0.5rem 0.9rem;
+  width: 52px;
+  height: 52px;
   border-radius: 999px;
   z-index: 1001;
-  transition: background 0.2s ease, transform 0.2s ease;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
 }
 
 .lightbox-nav:hover {
-  background: rgba(0, 0, 0, 0.55);
-  transform: translateY(-50%) scale(1.04);
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.42);
+  transform: translateY(-50%) scale(1.05);
 }
 
 #prev-lightbox {
-  left: 1.5rem;
+  left: max(1rem, calc(50% - 460px));
 }
 
 #next-lightbox {
-  right: 1.5rem;
+  right: max(1rem, calc(50% - 460px));
 }
 
 .lightbox-close {
@@ -231,6 +236,17 @@ nav button {
   display: none;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 700px) {
   .site-header {
     flex-direction: column;
@@ -252,7 +268,8 @@ nav button {
 
   .lightbox-nav {
     font-size: 2.2rem;
-    padding: 0.35rem 0.7rem;
+    width: 44px;
+    height: 44px;
   }
 
   #prev-lightbox {
