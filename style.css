@@ -1,0 +1,189 @@
+:root {
+  --bg: #f5f1e8;
+  --text: #1f1b18;
+  --muted: #6e6258;
+  --card: #fffaf2;
+  --accent: #a18b7a;
+  --border: #d8cdbf;
+}
+
+body.dark {
+  --bg: #151311;
+  --text: #f2ece4;
+  --muted: #b8aa9c;
+  --card: #201c19;
+  --accent: #a18b7a;
+  --border: #3a312b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+body.dark .site-header {
+  background: rgba(20, 20, 20, 0.78);
+}
+
+.brand {
+  font-weight: bold;
+  letter-spacing: 0.06em;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+nav a,
+nav button {
+  color: var(--text);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 85vh;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.72);
+}
+
+.hero-text {
+  position: absolute;
+  text-align: center;
+  padding: 1rem;
+  color: white;
+}
+
+.hero-text h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 0.5rem;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.85rem 1.2rem;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.section {
+  padding: 4rem 2rem;
+}
+
+.narrow {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.year-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 18px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.year-card:hover {
+  transform: translateY(-2px);
+}
+
+.gallery {
+  columns: 3 280px;
+  column-gap: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+  display: block;
+  break-inside: avoid;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 90vh;
+}
+
+.lightbox button {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
