@@ -1,15 +1,20 @@
-const toggle = document.getElementById("theme-toggle");
-const body = document.body;
-const savedTheme = localStorage.getItem("theme");
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
 
-if (savedTheme === "dark") {
-  body.classList.add("dark");
-}
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", String(!expanded));
+  });
 
-if (toggle) {
-  toggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-    const theme = body.classList.contains("dark") ? "dark" : "light";
-    localStorage.setItem("theme", theme);
+  document.addEventListener("click", (event) => {
+    const clickedInsideMenu = navMenu.contains(event.target);
+    const clickedToggle = menuToggle.contains(event.target);
+
+    if (!clickedInsideMenu && !clickedToggle) {
+      navMenu.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
   });
 }
