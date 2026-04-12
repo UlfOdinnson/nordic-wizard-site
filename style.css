@@ -32,6 +32,8 @@ body {
   line-height: 1.6;
 }
 
+/* HEADER */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -70,6 +72,8 @@ nav button {
   font: inherit;
 }
 
+/* HERO */
+
 .hero {
   position: relative;
   min-height: 85vh;
@@ -98,6 +102,8 @@ nav button {
   margin-bottom: 0.5rem;
 }
 
+/* BUTTON */
+
 .button {
   display: inline-block;
   margin-top: 1rem;
@@ -108,6 +114,8 @@ nav button {
   border-radius: 999px;
 }
 
+/* GENERAL LAYOUT */
+
 .section {
   padding: 4rem 2rem;
 }
@@ -116,6 +124,8 @@ nav button {
   max-width: 800px;
   margin: 0 auto;
 }
+
+/* YEAR GRID */
 
 .year-grid {
   display: grid;
@@ -137,6 +147,8 @@ nav button {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
+
+/* GALLERY */
 
 .gallery {
   display: grid;
@@ -161,17 +173,52 @@ nav button {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
-/* 🔥 ABOUT IMAGE (FIXED) */
+/* 🔥 ABOUT PAGE (NEW STRUCTURE) */
+
+.about-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.about-intro {
+  margin-bottom: 2rem;
+}
+
+.about-intro h1 {
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  margin-bottom: 0.4rem;
+}
+
+.about-lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 700px;
+}
+
+.about-story {
+  max-width: 760px;
+}
+
+.about-story p {
+  font-size: 1.12rem;
+  line-height: 1.9;
+  margin: 0 0 1.5rem 0;
+}
+
+/* 🔥 IMAGE FIXED + BETTER FRAMING */
+
 .about-image {
   width: 100%;
-  max-height: 650px;
+  max-height: 680px;
   object-fit: cover;
-  object-position: center top;
-  margin: 2rem 0;
+  object-position: center 25%;
+  margin: 2.5rem 0;
   border-radius: 14px;
   border: 1px solid var(--border);
   display: block;
 }
+
+/* LIGHTBOX */
 
 .lightbox {
   position: fixed;
@@ -196,7 +243,6 @@ nav button {
   top: 50%;
   transform: translateY(-50%);
   font-size: 2.6rem;
-  line-height: 1;
   color: white;
   background: rgba(0, 0, 0, 0.22);
   border: none;
@@ -204,9 +250,8 @@ nav button {
   width: 52px;
   height: 52px;
   border-radius: 999px;
-  z-index: 1001;
   opacity: 0.75;
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .lightbox-nav:hover {
@@ -235,13 +280,6 @@ nav button {
   width: 48px;
   height: 48px;
   border-radius: 999px;
-  z-index: 1001;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.lightbox-close:hover {
-  background: rgba(0, 0, 0, 0.5);
-  transform: scale(1.05);
 }
 
 .hidden {
@@ -249,15 +287,11 @@ nav button {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
 }
+
+/* MOBILE */
 
 @media (max-width: 700px) {
   .site-header {
@@ -269,8 +303,13 @@ nav button {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 
-  .lightbox {
-    padding: 1rem;
+  .about-story p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .about-lead {
+    font-size: 1rem;
   }
 
   .lightbox img {
@@ -284,16 +323,6 @@ nav button {
     height: 44px;
   }
 
-  #prev-lightbox {
-    left: 0.5rem;
-  }
-
-  #next-lightbox {
-    right: 0.5rem;
-  }
-
-  .lightbox-close {
-    top: 0.5rem;
-    right: 0.5rem;
-  }
+  #prev-lightbox { left: 0.5rem; }
+  #next-lightbox { right: 0.5rem; }
 }
