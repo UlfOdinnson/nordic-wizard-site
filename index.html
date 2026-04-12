@@ -3,21 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Nordic Wizard</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css" />
 </head>
 <body>
 
   <header class="site-header">
-    <div class="brand">The Nordic Wizard</div>
-    <nav>
+    
+    <!-- LOGO -->
+    <div class="brand">
+      <img src="images/logo.png" alt="The Nordic Wizard" class="logo">
+    </div>
+
+    <!-- HAMBURGER -->
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+
+    <!-- NAV -->
+    <nav id="nav-menu">
       <a href="index.html">Home</a>
       <a href="library.html">Library</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <button id="theme-toggle">◐</button>
     </nav>
+
   </header>
 
   <main>
@@ -32,49 +43,16 @@
         <a class="button" href="library.html">Enter the Library</a>
       </div>
     </section>
-
-    <section class="section">
-      <div class="narrow">
-        <h2>More than finished pieces</h2>
-        <p>
-          This archive follows the path from the first uncertain cuts to work made
-          with greater control, patience, and intention. Every year holds its own
-          chapter. Every piece carries something forward.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="narrow">
-        <h2>Featured Work</h2>
-        <p>
-          A few pieces from the ongoing journey.
-        </p>
-      </div>
-
-      <div class="gallery">
-        <img src="images/2026/2026FirstBatch-1.jpg" alt="Featured leatherwork 1" />
-        <img src="images/2026/2026FirstBatch-5.jpg" alt="Featured leatherwork 2" />
-        <img src="images/2026/2026FirstBatch-12.jpg" alt="Featured leatherwork 3" />
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="narrow">
-        <h2>The maker</h2>
-        <p>
-          This did not start with skill. It started with curiosity.<br><br>
-
-          Cheap leather, simple tools, and a need to make something real.
-          Every piece since then has been part of the same path forward.<br><br>
-
-          This is not just a collection of work. It is a record of learning,
-          failing, refining, and slowly shaping something true.
-        </p>
-        <a class="button" href="about.html">Read the Story</a>
-      </div>
-    </section>
   </main>
+
+  <script>
+    const toggle = document.getElementById("menu-toggle");
+    const nav = document.getElementById("nav-menu");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
