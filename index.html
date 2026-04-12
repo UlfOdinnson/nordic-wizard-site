@@ -3,56 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Nordic Wizard</title>
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css">
 </head>
 <body>
 
   <header class="site-header">
-    
-    <!-- LOGO -->
     <div class="brand">
-      <img src="images/logo.png" alt="The Nordic Wizard" class="logo">
+      <img src="images/logo.png" class="logo">
     </div>
-
-    <!-- HAMBURGER -->
-    <button class="menu-toggle" id="menu-toggle">☰</button>
-
-    <!-- NAV -->
-    <nav id="nav-menu">
+    <nav>
       <a href="index.html">Home</a>
       <a href="library.html">Library</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <button id="theme-toggle">◐</button>
     </nav>
-
   </header>
 
-  <main>
-    <section class="hero">
-      <img src="images/hero.jpg" alt="Featured leatherwork by The Nordic Wizard" />
-      <div class="hero-text">
-        <h1>A record of craft, time, and becoming.</h1>
-        <p>
-          This is not just a gallery of finished work. It is the story of learning,
-          failing, refining, and slowly shaping a craft into something true.
-        </p>
-        <a class="button" href="library.html">Enter the Library</a>
-      </div>
-    </section>
+  <main class="section narrow">
+    <h1>Contact</h1>
+    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    <p>Instagram: <a href="https://instagram.com/thenordicwizard" target="_blank">@thenordicwizard</a></p>
   </main>
-
-  <script>
-    const toggle = document.getElementById("menu-toggle");
-    const nav = document.getElementById("nav-menu");
-
-    toggle.addEventListener("click", () => {
-      nav.classList.toggle("active");
-    });
-  </script>
 
   <script src="script.js"></script>
 </body>
