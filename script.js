@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | The Nordic Wizard</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css" />
-</head>
-<body>
-  <header class="site-header">
-    <a href="index.html" class="brand" aria-label="The Nordic Wizard home">
-      <img src="images/logo.png" alt="The Nordic Wizard" class="logo" />
-    </a>
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
 
-    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-menu">☰</button>
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", String(!expanded));
+  });
 
-    <nav id="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="library.html">Library</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-  <main class="section narrow">
-    <h1>Contact</h1>
-    <p>For commissions, collaborations, or questions about a piece, reach out through Instagram at @thenordicwizard.</p>
-  </main>
-  <script src="script.js"></script>
-</body>
-</html>
+  document.addEventListener("click", (event) => {
+    const clickedInsideMenu = navMenu.contains(event.target);
+    const clickedToggle = menuToggle.contains(event.target);
+
+    if (!clickedInsideMenu && !clickedToggle) {
+      navMenu.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
