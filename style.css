@@ -270,3 +270,26 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   .hero img { height: 76vh; }
   .lightbox-nav { width: 44px; height: 44px; }
 }
+
+
+.year-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  min-height: 112px;
+}
+
+.year-icon img {
+  width: 92px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.92;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.year-card:hover .year-icon img {
+  transform: translateY(-2px) scale(1.04);
+  opacity: 1;
+}
