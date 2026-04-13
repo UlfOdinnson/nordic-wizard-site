@@ -3,79 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Nordic Wizard</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>2026 | The Nordic Wizard</title>
+  <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css" />
 </head>
 <body>
-
   <header class="site-header">
-    <a href="index.html" class="brand" aria-label="The Nordic Wizard home">
-      <img src="images/logo.png" alt="The Nordic Wizard" class="logo" />
+    <a href="../index.html" class="brand" aria-label="The Nordic Wizard home">
+      <img src="../images/logo.png" alt="The Nordic Wizard" class="logo" />
     </a>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-menu">☰</button>
 
     <nav id="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="library.html">Library</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="../index.html">Home</a>
+      <a href="../library.html">Library</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
     </nav>
   </header>
-
-  <main>
-    <section class="hero">
-      <img src="images/hero.jpg" alt="Featured leatherwork by The Nordic Wizard" />
-      <div class="hero-text">
-        <h1>A record of craft, time, and becoming.</h1>
-        <p>
-          This is not just a gallery of finished work. It is the story of learning,
-          failing, refining, and slowly shaping a craft into something true.
-        </p>
-        <a class="button" href="library.html">Enter the Library</a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="narrow">
-        <h2>More than finished pieces</h2>
-        <p>
-          This archive follows the path from the first uncertain cuts to work made
-          with greater control, patience, and intention. Every year holds its own
-          chapter. Every piece carries something forward.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="narrow">
-        <h2>Featured Work</h2>
-        <p>
-          A few pieces from the ongoing journey.
-        </p>
-      </div>
-
-      <div class="gallery">
-        <img src="images/2026/2026FirstBatch-1.jpg" alt="Featured leatherwork 1" />
-        <img src="images/2026/2026FirstBatch-5.jpg" alt="Featured leatherwork 2" />
-        <img src="images/2026/2026FirstBatch-12.jpg" alt="Featured leatherwork 3" />
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="narrow">
-        <h2>The maker</h2>
-        <p>
-          This did not start with skill. It started with curiosity.
-          Cheap leather, simple tools, and a need to make something real.
-          Every piece since then has been part of the same path forward.
-        </p>
-        <a class="button" href="about.html">Read the Story</a>
-      </div>
-    </section>
+  <main class="section">
+    <div class="year-intro">
+      <h1>2026</h1>
+      <p class="year-tagline">Where it becomes legacy.</p>
+        <p>A year that is still being written.</p>
+        <p>Design has become more collaborative, working closely with my wife to shape new ideas and directions.</p>
+        <p>Through Mikeal, I connected with Jay from Heavy Metal Smith, leading to a collaboration that brought new energy into the craft. Helldiver wallets, shared vision, and a forged seax in return.</p>
+        <p>The work is evolving. The circle is growing.</p>
+        <p>This is no longer just practice or progression. It is becoming something that lasts.</p>
+    </div>
+      <div class="gallery" id="gallery"></div>
   </main>
 
-  <script src="script.js"></script>
+  <div id="lightbox" class="lightbox hidden">
+    <button id="prev-lightbox" class="lightbox-nav" aria-label="Previous image">‹</button>
+    <img id="lightbox-image" src="" alt="" />
+    <button id="next-lightbox" class="lightbox-nav" aria-label="Next image">›</button>
+    <button id="close-lightbox" class="lightbox-close" aria-label="Close">×</button>
+  </div>
+
+
+  <script>
+    window.NW_GALLERY_IMAGES = Array.from({ length: 63 }, (_, index) => `../images/2026/2026FirstBatch-${index + 1}.jpg`);
+  </script>
+
+  <script src="../script.js"></script>
 </body>
 </html>
