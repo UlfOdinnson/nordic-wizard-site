@@ -270,3 +270,27 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   .hero img { height: 76vh; }
   .lightbox-nav { width: 44px; height: 44px; }
 }
+
+
+/* Chapter illustrations */
+.chapter-art {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.chapter-art img {
+  max-width: 180px;
+  width: 100%;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.chapter-art img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.chapter-art-large img {
+  max-width: 220px;
+}
