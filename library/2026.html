@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://use.typekit.net/edn2cmz.css" />
 </head>
 <body>
-
   <header class="site-header">
     <a href="../index.html" class="brand" aria-label="The Nordic Wizard home">
       <img src="../images/logo.png" alt="The Nordic Wizard" class="logo" />
@@ -23,28 +22,17 @@
       <a href="../contact.html">Contact</a>
     </nav>
   </header>
-
   <main class="section">
-    <div class="narrow">
+    <div class="year-intro">
       <h1>2026</h1>
-      <p>
-        This is where I am now.<br><br>
-
-        Still learning, still experimenting, but with a clearer understanding of the craft than ever before.<br><br>
-
-        The focus has shifted toward refinement. Small details. Precision. Pushing materials further. Exploring design in a way that feels both controlled and expressive.<br><br>
-
-        Every piece now carries everything that came before it. The early mistakes, the repetition, the experiments, all of it shows up in the work.<br><br>
-
-        This year is not about reaching a final point. It is about continuing the process, but at a higher level.<br><br>
-
-        The work is cleaner. Sharper. More intentional. But the goal has not changed.<br><br>
-
-        Keep getting better.
-      </p>
+      <p class="year-tagline">Where it becomes legacy.</p>
+        <p>A year that is still being written.</p>
+        <p>Design has become more collaborative, working closely with my wife to shape new ideas and directions.</p>
+        <p>Through Mikeal, I connected with Jay from Heavy Metal Smith, leading to a collaboration that brought new energy into the craft. Helldiver wallets, shared vision, and a forged seax in return.</p>
+        <p>The work is evolving. The circle is growing.</p>
+        <p>This is no longer just practice or progression. It is becoming something that lasts.</p>
     </div>
-
-    <div class="gallery" id="gallery"></div>
+      <div class="gallery" id="gallery"></div>
   </main>
 
   <div id="lightbox" class="lightbox hidden">
@@ -54,110 +42,9 @@
     <button id="close-lightbox" class="lightbox-close" aria-label="Close">×</button>
   </div>
 
+
   <script>
-    const gallery = document.getElementById("gallery");
-    const imageFiles = [];
-
-    const batches = [
-      { prefix: "2026FirstBatch", count: 62 }
-    ];
-
-    batches.forEach(batch => {
-      for (let i = 1; i <= batch.count; i++) {
-        imageFiles.push(`../images/2026/${batch.prefix}-${i}.jpg`);
-      }
-    });
-
-    let currentIndex = 0;
-
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightbox-image");
-    const closeLightbox = document.getElementById("close-lightbox");
-    const prevLightbox = document.getElementById("prev-lightbox");
-    const nextLightbox = document.getElementById("next-lightbox");
-
-    function openLightbox(index) {
-      currentIndex = index;
-      lightboxImage.src = imageFiles[currentIndex];
-      lightboxImage.alt = `Leatherwork from 2026 image ${currentIndex + 1}`;
-      lightbox.classList.remove("hidden");
-    }
-
-    function showNext() {
-      currentIndex = (currentIndex + 1) % imageFiles.length;
-      lightboxImage.src = imageFiles[currentIndex];
-      lightboxImage.alt = `Leatherwork from 2026 image ${currentIndex + 1}`;
-    }
-
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
-      lightboxImage.src = imageFiles[currentIndex];
-      lightboxImage.alt = `Leatherwork from 2026 image ${currentIndex + 1}`;
-    }
-
-    imageFiles.forEach((file, index) => {
-      const img = document.createElement("img");
-      img.src = file;
-      img.alt = `Leatherwork from 2026 image ${index + 1}`;
-
-      img.addEventListener("click", () => {
-        openLightbox(index);
-      });
-
-      img.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-      });
-
-      img.addEventListener("dragstart", (e) => {
-        e.preventDefault();
-      });
-
-      gallery.appendChild(img);
-    });
-
-    closeLightbox.addEventListener("click", () => {
-      lightbox.classList.add("hidden");
-    });
-
-    nextLightbox.addEventListener("click", (e) => {
-      e.stopPropagation();
-      showNext();
-    });
-
-    prevLightbox.addEventListener("click", (e) => {
-      e.stopPropagation();
-      showPrev();
-    });
-
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.add("hidden");
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (lightbox.classList.contains("hidden")) return;
-
-      if (e.key === "Escape") {
-        lightbox.classList.add("hidden");
-      }
-
-      if (e.key === "ArrowRight") {
-        showNext();
-      }
-
-      if (e.key === "ArrowLeft") {
-        showPrev();
-      }
-    });
-
-    lightboxImage.addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-    });
-
-    lightboxImage.addEventListener("dragstart", (e) => {
-      e.preventDefault();
-    });
+    window.NW_GALLERY_IMAGES = Array.from({ length: 63 }, (_, index) => `../images/2026/2026FirstBatch-${index + 1}.jpg`);
   </script>
 
   <script src="../script.js"></script>
