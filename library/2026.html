@@ -42,9 +42,11 @@
     <button id="close-lightbox" class="lightbox-close" aria-label="Close">×</button>
   </div>
 
-
   <script>
-    window.NW_GALLERY_IMAGES = Array.from({ length: 63 }, (_, index) => `../images/2026/2026FirstBatch-${index + 1}.jpg`);
+    window.NW_GALLERY_CONFIG = {
+      year: "2026",
+      folder: "2026"
+    };
   </script>
 
   <script src="../script.js"></script>

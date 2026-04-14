@@ -167,6 +167,48 @@ async function loadFeaturedWork() {
           label: yearLabel
         });
       });
+
+      if (!galleryImages.length) {
+        const configMatch = pageText.match(/window\.NW_GALLERY_CONFIG\s*=\s*\{\s*year:\s*"(\d{4})",\s*folder:\s*"([^"]+)"\s*\}/);
+        if (configMatch) {
+          const [, configYear, configFolder] = configMatch;
+          const batchNames = [
+            "FirstBatch", "SecondBatch", "ThirdBatch", "FourthBatch", "FifthBatch",
+            "SixthBatch", "SeventhBatch", "EighthBatch", "NinthBatch", "TenthBatch"
+          ];
+
+          for (const batchName of batchNames) {
+            const firstCandidate = `${pageDir}../images/${configFolder}/${configYear}${batchName}-1.jpg`;
+            try {
+              const firstResponse = await fetch(firstCandidate, { method: "HEAD", cache: "no-store" });
+              if (!firstResponse.ok) break;
+            } catch (error) {
+              break;
+            }
+
+            let imageIndex = 1;
+            while (true) {
+              const candidate = `${pageDir}../images/${configFolder}/${configYear}${batchName}-${imageIndex}.jpg`;
+              try {
+                const imageResponse = await fetch(candidate, { method: "HEAD", cache: "no-store" });
+                if (!imageResponse.ok) break;
+              } catch (error) {
+                break;
+              }
+
+              const resolvedSrc = new URL(candidate, window.location.href.replace(/[^/]*$/, "")).href;
+              collectedItems.push({
+                id: normalizePath(resolvedSrc),
+                imageSrc: resolvedSrc,
+                linkHref: pageHref,
+                alt: `${yearLabel} image ${imageIndex}`,
+                label: yearLabel
+              });
+              imageIndex += 1;
+            }
+          }
+        }
+      }
     }
 
     const itemsToRender = collectedItems.length >= 3 ? chooseFeaturedItems(collectedItems, 3) : chooseFeaturedItems(fallbackItems, 3);
@@ -179,14 +221,65 @@ async function loadFeaturedWork() {
 async function buildLibraryGallery() {
   const gallery = document.getElementById("gallery");
   const lightbox = document.getElementById("lightbox");
-  if (!gallery || !lightbox || !Array.isArray(window.NW_GALLERY_IMAGES)) return;
+  if (!gallery || !lightbox || !window.NW_GALLERY_CONFIG) return;
 
-  const imageFiles = window.NW_GALLERY_IMAGES;
-  let currentIndex = 0;
   const lightboxImage = document.getElementById("lightbox-image");
   const closeLightbox = document.getElementById("close-lightbox");
   const prevLightbox = document.getElementById("prev-lightbox");
   const nextLightbox = document.getElementById("next-lightbox");
+
+  const ORDINAL_BATCHES = [
+    "FirstBatch", "SecondBatch", "ThirdBatch", "FourthBatch", "FifthBatch",
+    "SixthBatch", "SeventhBatch", "EighthBatch", "NinthBatch", "TenthBatch"
+  ];
+
+  async function fileExists(url) {
+    try {
+      const response = await fetch(url, { method: "HEAD", cache: "no-store" });
+      return response.ok;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function detectImages(config, rootPrefix = "../images") {
+    const imageFiles = [];
+    const year = config.year;
+    const folder = config.folder;
+
+    for (const batchName of ORDINAL_BATCHES) {
+      const firstImage = `${rootPrefix}/${folder}/${year}${batchName}-1.jpg`;
+      const hasBatch = await fileExists(firstImage);
+
+      if (!hasBatch) {
+        break;
+      }
+
+      let index = 1;
+      while (true) {
+        const imagePath = `${rootPrefix}/${folder}/${year}${batchName}-${index}.jpg`;
+        const exists = await fileExists(imagePath);
+
+        if (!exists) {
+          break;
+        }
+
+        imageFiles.push(imagePath);
+        index += 1;
+      }
+    }
+
+    return imageFiles;
+  }
+
+  const imageFiles = await detectImages(window.NW_GALLERY_CONFIG);
+
+  if (!imageFiles.length) {
+    gallery.innerHTML = `<div class="empty-state">No gallery images found for this year yet.</div>`;
+    return;
+  }
+
+  let currentIndex = 0;
 
   function openLightbox(index) {
     currentIndex = index;
@@ -207,6 +300,8 @@ async function buildLibraryGallery() {
     lightboxImage.alt = `Leatherwork image ${currentIndex + 1}`;
   }
 
+  gallery.innerHTML = "";
+
   imageFiles.forEach((file, index) => {
     const img = document.createElement("img");
     img.src = file;
@@ -216,8 +311,14 @@ async function buildLibraryGallery() {
   });
 
   closeLightbox?.addEventListener("click", () => lightbox.classList.add("hidden"));
-  nextLightbox?.addEventListener("click", (event) => { event.stopPropagation(); showNext(); });
-  prevLightbox?.addEventListener("click", (event) => { event.stopPropagation(); showPrev(); });
+  nextLightbox?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    showNext();
+  });
+  prevLightbox?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    showPrev();
+  });
   lightbox.addEventListener("click", (event) => {
     if (event.target === lightbox) {
       lightbox.classList.add("hidden");
