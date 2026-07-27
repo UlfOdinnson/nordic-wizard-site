@@ -220,8 +220,24 @@ async function loadFeaturedWork() {
 
 async function buildLibraryGallery() {
   const gallery = document.getElementById("gallery");
-  const lightbox = document.getElementById("lightbox");
-  if (!gallery || !lightbox || !window.NW_GALLERY_CONFIG) return;
+  if (!gallery || !window.NW_GALLERY_CONFIG) return;
+
+  let lightbox = document.getElementById("lightbox");
+  if (!lightbox) {
+    lightbox = document.createElement("div");
+    lightbox.id = "lightbox";
+    lightbox.className = "lightbox hidden";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Image viewer");
+    lightbox.innerHTML = `
+      <button class="lightbox-close" id="close-lightbox" type="button" aria-label="Close image viewer">×</button>
+      <button class="lightbox-nav" id="prev-lightbox" type="button" aria-label="Previous image">‹</button>
+      <img id="lightbox-image" src="" alt="" />
+      <button class="lightbox-nav" id="next-lightbox" type="button" aria-label="Next image">›</button>
+    `;
+    document.body.appendChild(lightbox);
+  }
 
   const lightboxImage = document.getElementById("lightbox-image");
   const closeLightbox = document.getElementById("close-lightbox");
@@ -242,30 +258,43 @@ async function buildLibraryGallery() {
     }
   }
 
+  async function findLastImageIndex(prefix) {
+    if (!(await fileExists(`${prefix}-1.jpg`))) return 0;
+
+    let confirmed = 1;
+    let missing = 2;
+
+    while (await fileExists(`${prefix}-${missing}.jpg`)) {
+      confirmed = missing;
+      missing *= 2;
+    }
+
+    while (confirmed + 1 < missing) {
+      const candidate = Math.floor((confirmed + missing) / 2);
+
+      if (await fileExists(`${prefix}-${candidate}.jpg`)) {
+        confirmed = candidate;
+      } else {
+        missing = candidate;
+      }
+    }
+
+    return confirmed;
+  }
+
   async function detectImages(config, rootPrefix = "../images") {
     const imageFiles = [];
     const year = config.year;
     const folder = config.folder;
 
     for (const batchName of ORDINAL_BATCHES) {
-      const firstImage = `${rootPrefix}/${folder}/${year}${batchName}-1.jpg`;
-      const hasBatch = await fileExists(firstImage);
+      const prefix = `${rootPrefix}/${folder}/${year}${batchName}`;
+      const lastImageIndex = await findLastImageIndex(prefix);
 
-      if (!hasBatch) {
-        break;
-      }
+      if (!lastImageIndex) break;
 
-      let index = 1;
-      while (true) {
-        const imagePath = `${rootPrefix}/${folder}/${year}${batchName}-${index}.jpg`;
-        const exists = await fileExists(imagePath);
-
-        if (!exists) {
-          break;
-        }
-
-        imageFiles.push(imagePath);
-        index += 1;
+      for (let index = 1; index <= lastImageIndex; index += 1) {
+        imageFiles.push(`${prefix}-${index}.jpg`);
       }
     }
 
@@ -306,6 +335,8 @@ async function buildLibraryGallery() {
     const img = document.createElement("img");
     img.src = file;
     img.alt = `Leatherwork image ${index + 1}`;
+    img.loading = "lazy";
+    img.decoding = "async";
     img.addEventListener("click", () => openLightbox(index));
     gallery.appendChild(img);
   });
