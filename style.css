@@ -277,11 +277,11 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   justify-content: center;
   align-items: center;
   margin-bottom: 0.85rem;
-  min-height: 112px;
+  min-height: 150px;
 }
 
 .year-icon img {
-  width: 92px;
+  width: 140px;
   max-width: 100%;
   height: auto;
   display: block;
