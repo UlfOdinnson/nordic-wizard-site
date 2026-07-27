@@ -274,7 +274,7 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.contact-card:hover {
+.contact-card-link:hover {
   transform: translateY(-3px);
   border-color: var(--accent-soft);
 }
