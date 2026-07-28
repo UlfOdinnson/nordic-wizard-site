@@ -68,14 +68,15 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
 
 .hero {
   position: relative;
-  min-height: 85vh;
+  height: clamp(520px, 76vh, 860px);
+  min-height: 0;
   display: grid;
   place-items: center;
   overflow: hidden;
 }
 .hero img {
   width: 100%;
-  height: 85vh;
+  height: 100%;
   object-fit: cover;
   filter: brightness(0.5);
   box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
@@ -199,6 +200,12 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   text-transform: uppercase;
 }
 
+#featured-work-gallery {
+  width: min(100%, 1080px);
+  margin: 2rem auto 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .year-intro {
   max-width: 900px;
   margin: 0 auto 2rem;
@@ -305,9 +312,11 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
 }
 
 .footer-brand {
@@ -319,7 +328,8 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .footer-links a {
@@ -402,10 +412,14 @@ nav a:hover, nav button:hover { opacity: 0.85; color: var(--accent-soft); }
   }
   nav.active { display: flex; }
   .section { padding: 4rem 1.25rem; }
-  .hero img { height: 76vh; }
+  .hero { height: clamp(440px, 72vh, 680px); }
+  #featured-work-gallery {
+    max-width: 520px;
+    grid-template-columns: 1fr;
+  }
   .lightbox-nav { width: 44px; height: 44px; }
   .site-footer { padding: 1.4rem 1.25rem; }
-  .footer-inner { align-items: flex-start; }
+  .footer-inner { align-items: center; }
 }
 
 
